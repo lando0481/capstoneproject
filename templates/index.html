@@ -3,25 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <title>Flight Delay Prediction</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Flight Delay Prediction</h1>
-    <form action="/predict" method="post">
-        <label for="month">Month:</label>
-        <input type="number" id="month" name="month" required><br>
-        <label for="day_of_month">Day of Month:</label>
-        <input type="number" id="day_of_month" name="day_of_month" required><br>
-        <label for="carrier">Carrier Code:</label>
-        <input type="text" id="carrier" name="carrier" required><br>
-        <label for="dest">Destination:</label>
-        <input type="text" id="dest" name="dest" required><br>
-        <label for="flight_num">Flight Number:</label>
-        <input type="text" id="flight_num" name="flight_num" required><br>
-        <button type="submit">Predict</button>
-    </form>
-
+    <header>
+        <h1>Predicting Airplane Delays</h1>
+    </header>
+    <div class="container">
+        <div class="section">
+            <form action="/predict" method="post">
+                <div class="form-group">
+                    <label for="month">Month:</label>
+                    <input type="number" id="month" name="month" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="day_of_month">Day of Month:</label>
+                    <input type="number" id="day_of_month" name="day_of_month" required><br>
+                </div>
+                <div class="form-group">
+                    <label for="carrier">Carrier Code:</label>
+                    <select id="carrier" name="carrier" required>
+                    <option value="B6">B6</option>
+                    <option value="DL">DL</option>
+                    <option value="AA">AA</option>
+                    <option value="AS">AS</option>
+                    <option value="MQ">MQ</option>
+                    <option value="9E">9E</option>
+                    <option value="YX">YX</option>
+                    <option value="HA">HA</option>
+                    <option value="OO">OO</option>
+                    </select><br>
+                </div>
+                <div class="form-group">
+                    <label for="dest">Destination:</label>
+                    <select id="dest" name="dest" required>
+                        <option value="CHS">CHS</option>
+                        <option value="LAX">LAX</option>
+                        <option value="FLL">FLL</option>
+                        <option value="MCO">MCO</option>
+                        <option value="ATL">ATL</option>
+                        <option value="ORD">ORD</option>
+                        <option value="BUF">BUF</option>
+                        <option value="LGB">LGB</option>
+                        <option value="LAS">LAS</option>
+                        <option value="DCA">DCA</option>
+                        <option value="PHX">PHX</option>
+                        <option value="SFO">SFO</option>
+                        <option value="SJU">SJU</option>
+                        <option value="SLC">SLC</option>
+                        <option value="BOS">BOS</option>
+                        <option value="SAV">SAV</option>
+                        <option value="SYR">SYR</option>
+                        <option value="MSP">MSP</option>
+                        <option value="SEA">SEA</option>
+                        <option value="MIA">MIA</option>
+                        <option value="PDX">PDX</option>
+                        <option value="TPA">TPA</option>
+                        <option value="BTV">BTV</option>
+                        <option value="IAH">IAH</option>
+                        <option value="DEN">DEN</option>
+                        <option value="RSW">RSW</option>
+                        <option value="ORF">ORF</option>
+                        <option value="JAX">JAX</option>
+                        <option value="MSY">MSY</option>
+                        <option value="CLT">CLT</option>
+                        <option value="BNA">BNA</option>
+                        <option value="RDU">RDU</option>
+                        <option value="SAN">SAN</option>
+                        <option value="SJC">SJC</option>
+                        <option value="ROC">ROC</option>
+                        <option value="DFW">DFW</option>
+                        <option value="IAD">IAD</option>
+                        <option value="AUS">AUS</option>
+                        <option value="DTW">DTW</option>
+                        <option value="PWM">PWM</option>
+                        <option value="SRQ">SRQ</option>
+                        <option value="CMH">CMH</option>
+                        <option value="HNL">HNL</option>
+                        <option value="PBI">PBI</option>
+                        <option value="BWI">BWI</option>
+                        <option value="CLE">CLE</option>
+                        <option value="BUR">BUR</option>
+                        <option value="PIT">PIT</option>
+                        <option value="RIC">RIC</option>
+                        <option value="IND">IND</option>
+                        <option value="CVG">CVG</option>
+                        <option value="SMF">SMF</option>
+                        <option value="ONT">ONT</option>
+                        <option value="SAT">SAT</option>
+                        <option value="PSP">PSP</option>
+                        <option value="OAK">OAK</option>
+                        <option value="ABQ">ABQ</option>
+                        <option value="PSE">PSE</option>
+                        <option value="ORH">ORH</option>
+                        <option value="BQN">BQN</option>
+                        <option value="STT">STT</option>
+                        <option value="RNO">RNO</option>
+                        <option value="PHL">PHL</option>
+                    </select><br>
+                </div>
+                <div class="form-group">
+                    <label for="flight_num">Flight Number:</label>
+                    <input type="text" id="flight_num" name="flight_num" required><br>
+                </div>
+                <button type="submit" class="button">Check Delays</button>
+            </form>
+        </div>
     {% if prediction %}
         <h2>Prediction: {{ prediction }}</h2>
     {% endif %}
+        <div class="section">
+            <h2>Last Delayed Airplanes</h2>
+            <ul>
+                <li>Flight AA123 from New York to Los Angeles - Delayed by 2 hours</li>
+                <li>Flight BA456 from London to New York - Delayed by 1.5 hours</li>
+                <li>Flight CA789 from San Francisco to Tokyo - Delayed by 3 hours</li>
+                <li>Flight DA012 from Chicago to Miami - Delayed by 45 minutes</li>
+            </ul><br><br>
+        </div><br><br><br><br>
+    </div>
+    <footer>
+        <p>&copy; 2024 Predicting Airplane Delays</p>
+    </footer>
 </body>
 </html>
