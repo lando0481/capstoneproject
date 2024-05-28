@@ -5,7 +5,7 @@ from sklearn.metrics import accuracy_score
 import joblib
 
 # Load dataset
-df = pd.read_csv('flight_data.csv')
+df = pd.read_csv('data/flight_data.csv')
 #
 # # One-hot encode categorical variables
 # df = pd.get_dummies(df, columns=['Wind', 'Condition'])
